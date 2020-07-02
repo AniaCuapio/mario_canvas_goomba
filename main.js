@@ -1,6 +1,8 @@
 // Config
 let canvas = document.querySelector('canvas')
 let ctx = canvas.getContext('2d')
+let ctx = canvas.getContext('2d')
+ctx.font = "50px 'Press Start 2P'"
 //ctx.fillRect(0,0,canvas.width,canvas.height)
 
 // Globals
@@ -54,6 +56,15 @@ class Mario extends GameItem {
         if (this.x + 60 > canvas.width - 60) return
         mario.x += 64
     }
+
+    crashWith = (item) => { // false o un true ....
+        return (this.x < item.x + item.width) &&
+            (this.x + this.width > item.x) &&
+            (this.y < item.y + item.height) &&
+            (this.y + this.height > item.y);
+    }
+
+
 }
 
 class Goomba extends GameItem {
@@ -95,6 +106,8 @@ function update() { // esta mierda se repite infinitamente
     drawGoombas()
     // generate stuff:
     if (frames % 80 === 0) generateGoomba() // cual es el tiempo optimo para que no se encimen ...
+
+
 }
 
 function stop() {
@@ -118,6 +131,14 @@ function generateGoomba() {
 function drawGoombas() {  // ya podemos dibujarlos a todos
     enemies.forEach(goomba => { // porque es un ciclo 
         goomba.draw()
+    })
+}
+
+function checkCollition() {
+    enemies.forEach(goomba => {
+        if (mario.crashWith(goomba)) {
+            stop() // function aux restarle la vida y provar un brillo
+        }
     })
 }
 
