@@ -1,8 +1,7 @@
 // Config
 let canvas = document.querySelector('canvas')
 let ctx = canvas.getContext('2d')
-let ctx = canvas.getContext('2d')
-ctx.font = "50px 'Press Start 2P'"
+//ctx.font = "50px 'Press Start 2P'"
 //ctx.fillRect(0,0,canvas.width,canvas.height)
 
 // Globals
